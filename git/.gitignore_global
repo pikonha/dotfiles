@@ -1,0 +1,7 @@
+*.swo
+*.swp
+*.swn
+*.iml
+cover.out
+/.idea
+.tool-versions

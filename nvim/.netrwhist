@@ -1,0 +1,11 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =9
+let g:netrw_dirhist_9='/home/LUCAS.PICOLLO/.config/nvim'
+let g:netrw_dirhist_8='/home/LUCAS.PICOLLO/.config'
+let g:netrw_dirhist_7='/home/LUCAS.PICOLLO/.config/nvim'
+let g:netrw_dirhist_6='/home/LUCAS.PICOLLO/Development/microservice_toolkit'
+let g:netrw_dirhist_5='/home/LUCAS.PICOLLO/.config/nvim'
+let g:netrw_dirhist_4='/home/LUCAS.PICOLLO/Development/microservice_toolkit'
+let g:netrw_dirhist_3='/home/LUCAS.PICOLLO/Development/personal/go-market'
+let g:netrw_dirhist_2='/home/LUCAS.PICOLLO/Development/personal/go-market/api'
+let g:netrw_dirhist_1='/home/LUCAS.PICOLLO/Development/personal/go-market'
