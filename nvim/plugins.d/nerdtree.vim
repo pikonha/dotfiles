@@ -1,9 +1,12 @@
 Plug 'scrooloose/nerdtree'
 
 let g:NERDTreeQuitOnOpen = 1 " Close nerdtree when opening file
+let g:NERDTreeShowHidden=1
+let g:NERDTreeShowLineNumbers=1
 
 nnoremap <C-b> :NERDTreeToggle<CR>
 nnoremap <leader>n :NERDTreeFocus<CR>
+"nnoremap <leader>r :NERDTreeRefreshRoot<CR>
 
 
 autocmd StdinReadPre * let s:std_in=1

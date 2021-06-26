@@ -1,15 +1,22 @@
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-export ZSH="/home/picollo/.oh-my-zsh"
+export ZSH="/home/LUCAS.PICOLLO/.oh-my-zsh"
+export PATH="$PATH:/home/LUCAS.PICOLLO/.asdf/installs/golang/1.16.3/packages/bin:$HOME/.asdf/installs/nodejs/16.0.0/.npm/bin:$HOME/.asdf/installs/python/3.9.5/bin"
 
-ZSH_THEME="spaceship"
+ZSH_THEME="purify"
 
-plugins=(git asdf ssh-agent docker aws rails golang virtualenv)
+
+plugins=(git asdf ssh-agent docker docker-compose aws rails golang virtualenv tmux)
+
+ZSH_TMUX_AUTOSTART_ONCE=true
 
 zstyle :omz:plugins:ssh-agent identities id_rsa
 
 source $ZSH/oh-my-zsh.sh
 
 alias zshrc="nvim ~/.zshrc && source ~/.zshrc"
+alias dev="cd ~/Development"
 alias nvimrc="nvim ~/.config/nvim"
 alias nv="nvim"
 
@@ -31,6 +38,8 @@ SPACESHIP_PROMPT_ADD_NEWLINE=false
 SPACESHIP_CHAR_SYMBOL="❯"
 SPACESHIP_CHAR_SUFFIX=" "
 
+export JFROG_USERNAME=lucas.picollo
+
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
     print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
@@ -45,6 +54,7 @@ autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 ### End of Zinit's installer chunk
 
+
 zinit light denysdovhan/spaceship-prompt
 zinit light zdharma/fast-syntax-highlighting
 zinit light zsh-users/zsh-autosuggestions
@@ -57,3 +67,19 @@ function virtualenv_info {
 }
 
 . $HOME/.asdf/asdf.sh
+
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/LUCAS.PICOLLO/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/LUCAS.PICOLLO/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/LUCAS.PICOLLO/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/LUCAS.PICOLLO/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<

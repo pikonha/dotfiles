@@ -1,3 +1,4 @@
+set number
 set relativenumber
 set ignorecase  " searches are case insensitive...
 set smartcase   " ... unless they contain at least one capital letter
@@ -12,6 +13,7 @@ set mouse=a
                   " allow backspacing over everything in insert mode
 set autoindent    " always set autoindenting on
 set copyindent    " copy the previous indentation on autoindenting
+set hlsearch
 
 " More natural splitting
 set splitbelow
@@ -30,25 +32,24 @@ if (has("termguicolors"))
  set termguicolors
 endif
 
-colorscheme onedark
+colorscheme purify
+let g:airline_theme='purify'
 
 "" Keymapping
 ""
 
-imap jk <esc>
-imap kj <esc>
-imap <C-s> <esc>:w<cr>
-nnoremap <C-w>- :sp<cr>
-nnoremap <C-w>= :vsp<cr>
+inoremap jk <esc>
+inoremap kj <esc>
+noremap <C-s> <esc>:w<cr>
+nnoremap <F3> :bprev<cr>
+nnoremap <F4> :bnext<cr>
 nnoremap <F7> :tabp<cr>
 nnoremap <F8> :tabn<cr>
+nnoremap <C-w>- :sp<cr>
+nnoremap <C-w>= :vsp<cr>
+nnoremap <TAB> :tabn<cr>
 nnoremap <C-w>x :tabclose<cr>
 
-
-"" Autocomplete made easy
-inoremap <expr> <RETURN> pumvisible() ? "\<C-y>" : "\<CR>"
-inoremap <expr> <TAB> pumvisible() ? "\<C-y>" : "\<CR>"
-inoremap <expr> <Esc> pumvisible() ? "\<C-e>" : "\<Esc>"
-inoremap <expr> <C-c> pumvisible() ? "\<C-e>" : "\<Esc>"
-inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<Down>"
-inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<Up>"
+"" Copy and paste from clipboard
+nnoremap <leader>y "+y
+nnoremap <leader>p "+p
