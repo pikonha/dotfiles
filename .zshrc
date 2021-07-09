@@ -2,12 +2,13 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 export ZSH="/home/LUCAS.PICOLLO/.oh-my-zsh"
-export PATH="$PATH:/home/LUCAS.PICOLLO/.asdf/installs/golang/1.16.3/packages/bin:$HOME/.asdf/installs/nodejs/16.0.0/.npm/bin:$HOME/.asdf/installs/python/3.9.5/bin"
+export PATH="$PATH:/home/LUCAS.PICOLLO/.asdf/installs/golang/1.16.3/packages/bin:$HOME/.asdf/installs/nodejs/16.0.0/.npm/bin:$HOME/.asdf/installs/python/3.9.5/bin:$ASDF_USER_SHIMS"
 
 ZSH_THEME="purify"
 
 
 plugins=(git asdf ssh-agent docker docker-compose aws rails golang virtualenv tmux)
+export EDITOR=vim
 
 ZSH_TMUX_AUTOSTART_ONCE=true
 
@@ -15,10 +16,10 @@ zstyle :omz:plugins:ssh-agent identities id_rsa
 
 source $ZSH/oh-my-zsh.sh
 
-alias zshrc="nvim ~/.zshrc && source ~/.zshrc"
+alias zshrc="vim ~/.zshrc && source ~/.zshrc"
 alias dev="cd ~/Development"
-alias nvimrc="nvim ~/.config/nvim"
-alias nv="nvim"
+alias vimrc="vim ~/.config/nvim"
+alias tmuxrc="vim ~/.tmux.conf"
 
 SPACESHIP_PROMPT_ORDER=(
   user          # Username section

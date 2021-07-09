@@ -1,25 +1,39 @@
 call plug#begin('~/.vim/plugged')
 
-Plug 'tpope/vim-commentary'
+" INTERFACE
+Plug 'scrooloose/nerdtree'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'vim-airline/vim-airline'
+
+" GIT
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
-Plug 'sheerun/vim-polyglot'
-Plug 'joshdick/onedark.vim'
-Plug 'vim-airline/vim-airline'
+
+" PRODUCTIVITY
+Plug 'tpope/vim-commentary'
+Plug 'jiangmiao/auto-pairs'
+
+" THEME
+Plug 'artanikin/vim-synthwave84'
+Plug 'kyoz/purify', { 'rtp': 'vim' }
+" Plug 'joshdick/onedark.vim'
+
+" AUTOCOMPLETE
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+" Plug 'neovim/nvim-lspconfig'
+" Plug 'hrsh7th/nvim-compe'
+" Plug 'hrsh7th/vim-vsnip'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'antoinemadec/coc-fzf', {'branch': 'release'}
-Plug 'mhinz/vim-startify'
-Plug 'fatih/vim-go'
-Plug 'junegunn/fzf.vim'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'jiangmiao/auto-pairs'
-Plug 'tpope/vim-commentary'
-Plug 'kyoz/purify', { 'rtp': 'vim' }
+" Plug 'fatih/vim-go'
+" Plug 'sheerun/vim-polyglot'
 
-" Plugins that are neater in their own file
+call plug#end()
+
 for f in split(glob('~/.config/nvim/plugins.d/*.vim'), '\n')
     exe 'source' f
 endfor
-
-call plug#end()
