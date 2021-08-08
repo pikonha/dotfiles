@@ -6,8 +6,9 @@ mkdir .config
 
 # symlinks
 ln -s $DOTFILES/.zshrc $HOME/.zshrc
-ln -s $DOTFILES/nvim/* $HOME/.config
+ln -s $DOTFILES/nvim $HOME/.config
 ln -s $DOTFILES/.tmux.conf $HOME/.tmux.conf
+ln -s $DOTFILES/i3 $HOME
 
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim

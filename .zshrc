@@ -2,10 +2,21 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 export ZSH="/home/LUCAS.PICOLLO/.oh-my-zsh"
-export PATH="$PATH:/home/LUCAS.PICOLLO/.asdf/installs/golang/1.16.3/packages/bin:$HOME/.asdf/installs/nodejs/16.0.0/.npm/bin:$HOME/.asdf/installs/python/3.9.5/bin:$ASDF_USER_SHIMS"
+
+path=(
+  $path
+  $HOME/.asdf/installs/golang/1.16.3/packages/bin
+  $HOME/.asdf/installs/nodejs/16.0.0/.npm/bin
+  $HOME/.asdf/installs/nodejs/12.18.4/.npm/bin
+  $HOME/.asdf/installs/python/3.9.5/bin
+  $ASDF_USER_SHIMS
+)
 
 ZSH_THEME="purify"
 
+if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+  exec tmux
+fi
 
 plugins=(git asdf ssh-agent docker docker-compose aws rails golang virtualenv tmux)
 export EDITOR=vim
@@ -17,6 +28,7 @@ zstyle :omz:plugins:ssh-agent identities id_rsa
 source $ZSH/oh-my-zsh.sh
 
 alias zshrc="vim ~/.zshrc && source ~/.zshrc"
+alias i3rc="vim ~/.config/i3/config"
 alias dev="cd ~/Development"
 alias vimrc="vim ~/.config/nvim"
 alias tmuxrc="vim ~/.tmux.conf"

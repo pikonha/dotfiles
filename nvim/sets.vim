@@ -8,6 +8,7 @@ set incsearch   "show incremental search results as yo type"
 set tabstop=2
 set showtabline=2
 set shiftwidth=2
+set hidden
 set smarttab
 set smartindent
 set expandtab
@@ -52,7 +53,6 @@ nnoremap <F7> :tabp<cr>
 nnoremap <F8> :tabn<cr>
 nnoremap <C-w>- :sp<cr>
 nnoremap <C-w>= :vsp<cr>
-nnoremap <TAB> :tabn<cr>
 nnoremap <C-w>x :tabclose<cr>
 
 "" Copy and paste from clipboard

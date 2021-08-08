@@ -24,7 +24,8 @@ let g:coc_global_extensions = [
   \ 'coc-solargraph',
   \ 'coc-json',
   \ 'coc-python',
-  \ 'coc-tsserver'
+  \ 'coc-tsserver',
+  \ 'coc-html'
 \ ]
 
 nmap <silent> <leader>d <Plug>(coc-definition)
