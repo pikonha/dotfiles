@@ -90,9 +90,10 @@ bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
-assign [class="Hyper"] $ws2
+# assign [class="Hyper"] $ws2
+assign [class="Konsole"] $ws2
 assign [class="Slack"] $ws3
-
+assign [class="Spotify"] $ws0
 
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
@@ -133,6 +134,7 @@ client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color      
 hide_edge_borders both
 
 bar {
+  height 25
   status_command i3blocks
 	colors {
 		background $bg-color
@@ -148,9 +150,9 @@ bar {
 bindsym $mod+d exec rofi -show run -lines 3 -eh 2 -width 100 -padding 800 -opacity "85" -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "#9575cd"
 
 # Pulse Audio controls
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+# bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
+# bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
+# bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
 
 # Sreen brightness controls
 bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
@@ -163,15 +165,40 @@ bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
 # english with dead keys
-exec_always setxkbmap -layout us -variant intl
+exec_always --no-startup-id setxkbmap -layout us -variant intl
 # caps as ctrl
-exec_always setxkbmap -option caps:ctrl_modifier
+exec_always --no-startup-id setxkbmap -option caps:ctrl_modifier
 
 # set lock key
 bindsym $mod+shift+x exec i3lock
 
 # set wallpaper
-exec_always feh --bg-scale /home/LUCAS.PICOLLO/Downloads/sereniyu.jpg
+exec_always feh --bg-scale /home/LUCAS.PICOLLO/Downloads/wave.jpeg
 
 # area screenshot
 bindsym Shift+$mod+s exec --no-startup-id maim --select | xclip -selection clipboard -t image/png
+# Review the lines below and append to ~/.config/i3/config
+
+## Volume control
+
+# Path to volume control, without trailing slash
+set $volumepath ~/i3-volume
+
+set $statuscmd i3status
+
+# Signal used to update the status line
+#   i3blocks uses SIGRTMIN+10 by default
+#   i3status uses SIGUSR1 by default
+set $statussig SIGUSR1
+
+# Amount to increase/decrease volume as a percentage
+set $volumestep 5
+
+for_window [class="^.*"] border pixel 0
+gaps inner 4
+gaps outer 4
+
+bindsym $mod+z		gaps outer current plus 5
+bindsym $mod+Shift+z	gaps outer current minus 5
+
+exec_always --no-startup-id picom -CGb --experimental-backends

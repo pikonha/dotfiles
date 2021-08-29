@@ -1,5 +1,3 @@
-
-
 set number
 set relativenumber
 set ignorecase  " searches are case insensitive...
@@ -19,6 +17,7 @@ set noswapfile
 set autoindent    " always set autoindenting on
 set copyindent    " copy the previous indentation on autoindenting
 set hlsearch
+set clipboard^=unnamed,unnamedplus
 
 " More natural splitting
 set splitbelow
@@ -38,11 +37,11 @@ if (has("termguicolors"))
 endif
 
 colorscheme synthwave84
+" colorscheme synthwave84
 " colorscheme purify
 let g:airline_theme='purify'
 
 "" Keymapping
-""
 
 inoremap jk <esc>
 inoremap kj <esc>
@@ -54,10 +53,6 @@ nnoremap <F8> :tabn<cr>
 nnoremap <C-w>- :sp<cr>
 nnoremap <C-w>= :vsp<cr>
 nnoremap <C-w>x :tabclose<cr>
-
-"" Copy and paste from clipboard
-vnoremap <C-y> "+y
-" nnoremap <C-v>  "+p
 
 " reload vim config
 nnoremap <leader>sv :source $MYVIMRC<CR>
