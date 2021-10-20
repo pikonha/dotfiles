@@ -2,6 +2,9 @@ lua <<EOF
 require'nvim-treesitter.configs'.setup {
     ensure_installed = {"bash", "javascript", "ruby", "go", "dockerfile", "html", "json", "yaml"},
 
+    autotag = {
+      enable = true,
+    },
     highlight = {
       enable = true,
     },

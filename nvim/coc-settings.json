@@ -7,5 +7,10 @@
       "trace.server": "verbose",
       "filetypes": ["go"]
     }
+  },
+  "eslint": {
+    "packageManager": "yarn",
+    "alwaysShowStatus": true,
+    "autoFixOnSave": true
   }
 }

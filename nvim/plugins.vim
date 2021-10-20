@@ -8,6 +8,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'simeji/winresizer'
+Plug 'nathanaelkane/vim-indent-guides'
 
 " GIT
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -16,10 +17,14 @@ Plug 'tpope/vim-fugitive'
 
 " PRODUCTIVITY
 Plug 'tpope/vim-commentary'
-Plug 'jiangmiao/auto-pairs'
 Plug 'mg979/vim-visual-multi'
-Plug 'turbio/bracey.vim'
+" Plug 'turbio/bracey.vim'
 Plug 'mattn/emmet-vim'
+Plug 'alvan/vim-closetag'
+Plug 'neoclide/vim-jsx-improve'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+" Plug 'tpope/vim-surround'
+Plug 'junegunn/vim-easy-align'
 
 " THEME
 Plug 'arcticicestudio/nord-vim'
@@ -33,7 +38,7 @@ Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'antoinemadec/coc-fzf', {'branch': 'release'}
 Plug 'fatih/vim-go'
-"
+Plug 'windwp/nvim-ts-autotag'
 
 call plug#end()
 

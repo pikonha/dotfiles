@@ -19,6 +19,9 @@ set copyindent    " copy the previous indentation on autoindenting
 set hlsearch
 set clipboard^=unnamed,unnamedplus
 
+" autocmd FileType javascript setlocal shiftwidth=2 tabstop=2
+" autocmd FileType javascriptreact setlocal shiftwidth=2 tabstop=2
+
 " More natural splitting
 set splitbelow
 set splitright
@@ -45,14 +48,23 @@ let g:airline_theme='purify'
 
 inoremap jk <esc>
 inoremap kj <esc>
-noremap <C-s> <esc>:w<cr>
+nnoremap <silent> <C-s> :w<cr>
+inoremap <silent> <C-s> <esc>:w<cr>
 nnoremap <F3> :bprev<cr>
 nnoremap <F4> :bnext<cr>
 nnoremap <F7> :tabp<cr>
 nnoremap <F8> :tabn<cr>
+nnoremap <C-l> :noh<cr>
 nnoremap <C-w>- :sp<cr>
 nnoremap <C-w>= :vsp<cr>
 nnoremap <C-w>x :tabclose<cr>
 
+" show next match in the center of the screen
+nnoremap n nzz
+nnoremap N Nzz
+
 " reload vim config
 nnoremap <leader>sv :source $MYVIMRC<CR>
+
+" save files with sudo
+cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!

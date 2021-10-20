@@ -25,8 +25,12 @@ let g:coc_global_extensions = [
   \ 'coc-json',
   \ 'coc-python',
   \ 'coc-tsserver',
-  \ 'coc-html'
+  \ 'coc-html',
+  \ 'coc-eslint',
+  \ 'coc-prettier',
 \ ]
+
+command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
 
 nmap <silent> <leader>d <Plug>(coc-definition)
 nmap <silent> <leader>r <Plug>(coc-references)

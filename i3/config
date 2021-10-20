@@ -1,6 +1,6 @@
 
 # win mod
-set $mod Mod4
+set $mod Mod1
 
 font pango:monospace 10
 
@@ -9,11 +9,6 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
 
 set $refresh_i3status killall -SIGUSR1 i3status
-# bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
-# bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
-# bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
-# bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
-
 floating_modifier $mod
 
 bindsym $mod+Return exec i3-sensible-terminal
@@ -126,33 +121,54 @@ set $urgent-bg-color     #E53935
 
 # window colors
 #                       border              background         text                 indicator
-client.focused          $bg-color           $bg-color          $text-color          #00ff00
-client.unfocused        $inactive-bg-color $inactive-bg-color $inactive-text-color #00ff00
-client.focused_inactive $inactive-bg-color $inactive-bg-color $inactive-text-color #00ff00
-client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color          #00ff00
+# client.focused          $bg-color           $bg-color          $text-color          #00ff00
+# client.unfocused        $inactive-bg-color $inactive-bg-color $inactive-text-color #00ff00
+# client.focused_inactive $inactive-bg-color $inactive-bg-color $inactive-text-color #00ff00
+# client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color          #00ff00
+
+# # class                 border  bground text    indicator child_border
+client.focused          #6272A4 #6272A4 #F8F8F2 #6272A4   #6272A4
+client.focused_inactive #44475A #44475A #F8F8F2 #44475A   #44475A
+client.unfocused        #282A36 #282A36 #BFBFBF #282A36   #282A36
+client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
+client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
+
+client.background       #F8F8F2
 
 hide_edge_borders both
 
 bar {
   height 25
-  status_command i3blocks
+  status_command i3blocks # -c ~/.config/i3status/config
 	colors {
-		background $bg-color
-	    	separator #757575
+    background #282A36
+    statusline #F8F8F2
+    separator  #44475A
+
+    focused_workspace  #44475A #44475A #F8F8F2
+    active_workspace   #282A36 #44475A #F8F8F2
+    inactive_workspace #282A36 #282A36 #BFBFBF
+    urgent_workspace   #FF5555 #FF5555 #F8F8F2
+    binding_mode       #FF5555 #FF5555 #F8F8F2
+  }
+	# colors {
+	# 	background $bg-color
+	#     	separator #757575
 		#                  border             background         text
-		focused_workspace  $bg-color          $bg-color          $text-color
-		inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
-		urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
-	}
+		# focused_workspace  $bg-color          $bg-color          $text-color
+		# inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
+		# urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
+	# }
   position top
 }
 
-bindsym $mod+d exec rofi -show run -lines 3 -eh 2 -width 100 -padding 800 -opacity "85" -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "#9575cd"
+bindsym $mod+d exec "dmenu_run -nf '#F8F8F2' -nb '#282A36' -sb '#6272A4' -sf '#F8F8F2' -fn 'monospace-10' -p 'dmenu%'"
+# bindsym $mod+d exec rofi -show run -lines 3 -eh 2 -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "#9575cd"
 
 # Pulse Audio controls
-# bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
-# bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
-# bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+bindsym XF86AudioRaiseVolume exec amixer -q -D pulse sset Master 5%+ && pkill -RTMIN+10 i3blocks
+bindsym XF86AudioLowerVolume exec amixer -q -D pulse sset Master 5%- && pkill -RTMIN+10 i3blocks
+bindsym XF86AudioMute exec amixer -q -D pulse sset Master toggle && pkill -RTMIN+10 i3blocks
 
 # Sreen brightness controls
 bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
@@ -173,7 +189,8 @@ exec_always --no-startup-id setxkbmap -option caps:ctrl_modifier
 bindsym $mod+shift+x exec i3lock
 
 # set wallpaper
-exec_always feh --bg-scale /home/LUCAS.PICOLLO/Downloads/wave.jpeg
+exec_always feh --bg-scale /home/LUCAS.PICOLLO/Documents/mob.png
+# exec_always feh --bg-scale /home/LUCAS.PICOLLO/Downloads/wave.jpeg
 
 # area screenshot
 bindsym Shift+$mod+s exec --no-startup-id maim --select | xclip -selection clipboard -t image/png
@@ -202,3 +219,18 @@ bindsym $mod+z		gaps outer current plus 5
 bindsym $mod+Shift+z	gaps outer current minus 5
 
 exec_always --no-startup-id picom -CGb --experimental-backends
+#
+## Volume control
+
+# Path to volume control, without trailing slash
+set $volumepath ~/i3-volume
+
+set $statuscmd i3status
+
+# Signal used to update the status line
+#   i3blocks uses SIGRTMIN+10 by default
+#   i3status uses SIGUSR1 by default
+set $statussig SIGUSR1
+
+# Amount to increase/decrease volume as a percentage
+set $volumestep 5

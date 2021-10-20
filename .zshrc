@@ -18,7 +18,7 @@ if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] &&
   exec tmux
 fi
 
-plugins=(git asdf ssh-agent docker docker-compose aws rails golang virtualenv tmux)
+plugins=(git asdf ssh-agent docker docker-compose aws rails golang virtualenv tmux autoswitch_virtualenv)
 export EDITOR=vim
 
 ZSH_TMUX_AUTOSTART_ONCE=true
@@ -32,6 +32,8 @@ alias i3rc="vim ~/.config/i3/config"
 alias dev="cd ~/Development"
 alias vimrc="vim ~/.config/nvim"
 alias tmuxrc="vim ~/.tmux.conf"
+alias k="kubectl"
+complete -F __start_kubectl k
 
 SPACESHIP_PROMPT_ORDER=(
   user          # Username section
@@ -74,6 +76,7 @@ zinit light zsh-users/zsh-autosuggestions
 zinit light zsh-users/zsh-completions
 zinit ice atload"zpcdreplay" atclone'./zplug.zsh'
 zinit light g-plane/zsh-yarn-autocompletions
+
 
 function virtualenv_info {
 [ $VIRTUAL_ENV ] && echo ‘(‘`basename $VIRTUAL_ENV`’) ‘
