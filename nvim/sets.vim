@@ -1,5 +1,4 @@
-set number
-set relativenumber
+set number relativenumber
 set ignorecase  " searches are case insensitive...
 set smartcase   " ... unless they contain at least one capital letter
 set incsearch   "show incremental search results as yo type"
@@ -68,3 +67,7 @@ nnoremap <leader>sv :source $MYVIMRC<CR>
 
 " save files with sudo
 cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
+
+" moving selection
+vnoremap <C-j> :m '>+1<CR>gv=gv
+vnoremap <C-k> :m '<-2<CR>gv=gv

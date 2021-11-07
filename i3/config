@@ -1,6 +1,6 @@
 
 # win mod
-set $mod Mod1
+set $mod Mod4
 
 font pango:monospace 10
 
@@ -234,3 +234,4 @@ set $statussig SIGUSR1
 
 # Amount to increase/decrease volume as a percentage
 set $volumestep 5
+

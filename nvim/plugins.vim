@@ -25,6 +25,7 @@ Plug 'neoclide/vim-jsx-improve'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 " Plug 'tpope/vim-surround'
 Plug 'junegunn/vim-easy-align'
+Plug 'jeffkreeftmeijer/vim-numbertoggle'
 
 " THEME
 Plug 'arcticicestudio/nord-vim'

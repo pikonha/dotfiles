@@ -7,6 +7,8 @@ require'nvim-tree'.setup {
   }
 EOF
 
+
+
 nnoremap <C-b> :NvimTreeToggle<CR>
 
 let g:nvim_tree_ignore = [ '.git', 'node_modules', '.cache' ]
