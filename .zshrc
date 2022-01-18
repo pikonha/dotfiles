@@ -1,15 +1,11 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-
-export ZSH="/home/LUCAS.PICOLLO/.oh-my-zsh"
+export ZSH="/home/picollo/.oh-my-zsh"
 
 path=(
-  $path
-  $HOME/.asdf/installs/golang/1.16.3/packages/bin
-  $HOME/.asdf/installs/nodejs/16.0.0/.npm/bin
-  $HOME/.asdf/installs/nodejs/12.18.4/.npm/bin
-  $HOME/.asdf/installs/python/3.9.5/bin
+  $HOME/.asdf/installs/golang/**/packages/bin
+  $HOME/.asdf/installs/nodejs/**/.npm/lib
   $ASDF_USER_SHIMS
+  $HOME/.local/bin
+  $path
 )
 
 ZSH_THEME="purify"
@@ -18,18 +14,34 @@ if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] &&
   exec tmux
 fi
 
-plugins=(git asdf ssh-agent docker docker-compose aws rails golang virtualenv tmux autoswitch_virtualenv)
+plugins=(
+  git
+  asdf
+  ssh-agent
+  docker
+  docker-compose
+  aws
+  rails
+  golang
+  virtualenv
+  tmux
+  zsh-syntax-highlighting
+  zsh-autosuggestions
+)
 export EDITOR=vim
 
 ZSH_TMUX_AUTOSTART_ONCE=true
 
-zstyle :omz:plugins:ssh-agent identities id_rsa
+zstyle :omz:plugins:ssh-agent identities id_ed25519 github
 
 source $ZSH/oh-my-zsh.sh
 
 alias zshrc="vim ~/.zshrc && source ~/.zshrc"
 alias i3rc="vim ~/.config/i3/config"
-alias dev="cd ~/Development"
+alias dev="cd ~/dev"
+alias ba="cd ~/dev/blockatlas"
+alias vba="cd ~/dev/blockatlas && vim ."
+alias xcp="xclip -selection c"
 alias vimrc="vim ~/.config/nvim"
 alias tmuxrc="vim ~/.tmux.conf"
 alias k="kubectl"
@@ -53,30 +65,6 @@ SPACESHIP_PROMPT_ADD_NEWLINE=false
 SPACESHIP_CHAR_SYMBOL="❯"
 SPACESHIP_CHAR_SUFFIX=" "
 
-export JFROG_USERNAME=lucas.picollo
-
-### Added by Zinit's installer
-if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
-    print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
-    command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
-    command git clone https://github.com/zdharma/zinit "$HOME/.zinit/bin" && \
-        print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
-        print -P "%F{160}▓▒░ The clone has failed.%f%b"
-fi
-
-source "$HOME/.zinit/bin/zinit.zsh"
-autoload -Uz _zinit
-(( ${+_comps} )) && _comps[zinit]=_zinit
-### End of Zinit's installer chunk
-
-
-zinit light denysdovhan/spaceship-prompt
-zinit light zdharma/fast-syntax-highlighting
-zinit light zsh-users/zsh-autosuggestions
-zinit light zsh-users/zsh-completions
-zinit ice atload"zpcdreplay" atclone'./zplug.zsh'
-zinit light g-plane/zsh-yarn-autocompletions
-
 
 function virtualenv_info {
 [ $VIRTUAL_ENV ] && echo ‘(‘`basename $VIRTUAL_ENV`’) ‘
@@ -85,23 +73,26 @@ function virtualenv_info {
 . $HOME/.asdf/asdf.sh
 
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/LUCAS.PICOLLO/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/LUCAS.PICOLLO/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/LUCAS.PICOLLO/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/LUCAS.PICOLLO/miniconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
-unalias rd
-
 # Generated for envman. Do not edit.
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
 
+source ~/.zplug/init.zsh
+
+zplug 'denysdovhan/spaceship-prompt'
+zplug 'zsh-users/zsh-completions'
+zplug 'g-plane/zsh-yarn-autocompletions'
+zplug "MichaelAquilina/zsh-autoswitch-virtualenv"
+
+# Install plugins if there are plugins that have not been installed
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
+fi
+
+export GOPRIVATE=gitlab.com,go.blockdaemon.com
+export KUBE_CONFIG_PATH=~/.kube/config
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/bin/terraform terraform
